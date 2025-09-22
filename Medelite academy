@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>MedElite Academy — Global Medical Courses</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial'] },
+          colors: {
+            navy: {
+              50: '#EEF2F7',
+              100: '#D6DEEA',
+              200: '#B0C0D6',
+              300: '#8AA2C2',
+              400: '#6484AE',
+              500: '#3E669A',
+              600: '#274F83',
+              700: '#1F3E67',
+              800: '#172D4B',
+              900: '#0F1D30'
+            },
+            brand: {
+              navy: '#0F1D30',
+              sky: '#3E669A',
+              gray: '#F1F4F8',
+              accent: '#35B0AB'
+            }
+          },
+          boxShadow: {
+            card: '0 10px 25px -10px rgba(15,29,48,.25)',
+            soft: '0 6px 20px rgba(15,29,48,.12)'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Smooth page transitions */
+    .fade-enter { opacity: 0; transform: translateY(8px); }
+    .fade-enter-active { opacity: 1; transform: translateY(0); transition: opacity .25s ease, transform .25s ease; }
+
+    /* Pretty scrollbars */
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-track { background: #e9edf3; }
+    ::-webkit-scrollbar-thumb { background: #b6c2d4; border-radius: 6px; }
+    ::-webkit-scrollbar-thumb:hover { background: #96a6bd; }
+  </style>
+</head>
+<body class="bg-[linear-gradient(180deg,#0F1D30_0%,#172D4B_30%,#F1F4F8_30%,#F1F4F8_100%)] text-slate-800 font-sans">
+  <!-- Top Announcement Bar -->
+  <div class="w-full bg-navy-800 text-white/90 text-sm py-2">
+    <div class="max-w-7xl mx-auto px-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <span class="inline-flex items-center gap-2">
+          <!-- Shield Medical Icon -->
+          <svg width="18" height="18" viewBox="0 0 24 24" class="text-brand-accent"><path fill="currentColor" d="M12 2l7 3v6c0 5-3.4 9.2-7 11c-3.6-1.8-7-6-7-11V5l7-3Zm-1 6H9v2H7v2h2v2h2v-2h2v-2h-2V8Z"/></svg>
+          <span class="hidden sm:inline">Global medical courses with secure PayPal checkout (demo) • Fast support via Telegram</span>
+          <span class="sm:hidden">Med courses • PayPal demo • Telegram</span>
+        </span>
+      </div>
+      <div class="flex items-center gap-2">
+        <a id="topbar-telegram" href="#" target="_blank" rel="noopener noreferrer"
+           class="px-3 py-1.5 rounded-md bg-brand-accent text-navy-900 font-medium hover:opacity-90 transition">
+          Contact on Telegram
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header / Nav -->
+  <header class="sticky top-0 z-50 backdrop-blur bg-white/90 shadow-soft">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="#/home" class="flex items-center gap-3 group">
+        <!-- Simple medical shield logo -->
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-navy-700 to-navy-900 shadow-card grid place-content-center">
+          <svg width="22" height="22" viewBox="0 0 24 24" class="text-white"><path fill="currentColor" d="M12 2l7 3v6c0 5-3.4 9.2-7 11c-3.6-1.8-7-6-7-11V5l7-3Zm-1 6H9v2H7v2h2v2h2v-2h2v-2h-2V8Z"/></svg>
+        </div>
+        <div>
+          <div class="text-lg sm:text-xl font-bold text-navy-900 leading-tight">MedElite Academy</div>
+          <div class="text-xs text-slate-500 -mt-0.5">Global Medical Learning</div>
+        </div>
+      </a>
+      <nav class="hidden md:flex items-center gap-2 text-sm">
+        <a href="#/home" class="nav-link px-3 py-2 rounded-lg hover:bg-slate-100">Home</a>
+        <a href="#/courses" class="nav-link px-3 py-2 rounded-lg hover:bg-slate-100">Courses</a>
+        <a href="#/about" class="nav-link px-3 py-2 rounded-lg hover:bg-slate-100">About</a>
+        <a href="#/contact" class="nav-link px-3 py-2 rounded-lg hover:bg-slate-100">Contact</a>
+        <a href="#/instructor" class="nav-link px-3 py-2 rounded-lg hover:bg-slate-100">Work with us</a>
+        <a href="#/dashboard" class="px-3 py-2 rounded-lg bg-navy-800 text-white hover:bg-navy-700 transition">Dashboard</a>
+      </nav>
+      <div class="flex items-center gap-2">
+        <a href="#/register" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-brand-accent text-navy-900 font-semibold shadow-soft hover:opacity-90 transition">
+          <svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M12 12a5 5 0 1 0-5-5a5 5 0 0 0 5 5Zm0 2c-4 0-8 2-8 6v2h16v-2c0-4-4-6-8-6Z"/></svg>
+          Join Now (Demo)
+        </a>
+        <!-- Settings Button -->
+        <button id="open-settings" class="p-2 rounded-lg border border-slate-200 hover:bg-slate-100 text-navy-900" title="Settings">
+          <svg width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M10.325 4.317L9.9 2H14.1l-.425 2.317a7.967 7.967 0 0 1 1.85 1.07L17.7 4.6l2.122 2.122l-1.786 2.175c.404.584.73 1.224.966 1.9L21 11.9v2.2l-2.001.103c-.236.676-.562 1.316-.966 1.9l1.786 2.175L17.7 20.4l-2.175-1.786a7.967 7.967 0 0 1-1.9.966L14.1 22H9.9l.425-2.317a7.967 7.967 0 0 1-1.85-1.07L6.3 20.4l-2.122-2.122l1.786-2.175a7.967 7.967 0 0 1-.966-1.9L3 14.1v-2.2l2.001-.103c.236-.676.562-1.316.966-1.9L4.181 7.722L6.3 5.6l2.175 1.786c.584-.404 1.224-.73 1.9-.966ZM12 15a3 3 0 1 0 0-6a3 3 0 0 0 0 6Z"/></svg>
+        </button>
+        <button id="mobile-menu" class="md:hidden p-2 rounded-lg border border-slate-200 hover:bg-slate-100 text-navy-900" aria-label="Menu">
+          <svg width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+        </button>
+      </div>
+    </div>
+    <!-- Mobile Nav -->
+    <div id="mobile-nav" class="md:hidden hidden border-t border-slate-200 bg-white">
+      <nav class="max-w-7xl mx-auto px-4 py-3 grid gap-1">
+        <a href="#/home" class="px-3 py-2 rounded-lg hover:bg-slate-100">Home</a>
+        <a href="#/courses" class="px-3 py-2 rounded-lg hover:bg-slate-100">Courses</a>
+        <a href="#/about" class="px-3 py-2 rounded-lg hover:bg-slate-100">About</a>
+        <a href="#/contact" class="px-3 py-2 rounded-lg hover:bg-slate-100">Contact</a>
+        <a href="#/instructor" class="px-3 py-2 rounded-lg hover:bg-slate-100">Work with us</a>
+        <a href="#/dashboard" class="px-3 py-2 rounded-lg bg-navy-800 text-white">Dashboard</a>
+        <a href="#/register" class="px-3 py-2 rounded-lg bg-brand-accent text-navy-900 font-semibold">Join Now (Demo)</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main App Container -->
+  <main id="app" class="min-h-[70vh]"></main>
+
+  <!-- Footer -->
+  <footer class="mt-16 bg-navy-900 text-white">
+    <div class="max-w-7xl mx-auto px-4 py-12 grid md:grid-cols-4 gap-10">
+      <div>
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-navy-700 to-navy-900 grid place-content-center">
+            <svg width="22" height="22" viewBox="0 0 24 24" class="text-white"><path fill="currentColor" d="M12 2l7 3v6c0 5-3.4 9.2-7 11c-3.6-1.8-7-6-7-11V5l7-3Zm-1 6H9v2H7v2h2v2h2v-2h2v-2h-2V8Z"/></svg>
+          </div>
+          <div class="text-xl font-bold">MedElite Academy</div>
+        </div>
+        <p class="text-white/70">Empowering healthcare professionals worldwide with practical, high‑quality learning.</p>
+        <div class="flex items-center gap-4 mt-4">
+          <!-- Minimal PayPal mark (custom vector) -->
+          <div class="flex items-center gap-2 bg-white/10 rounded-lg px-3 py-2">
+            <div class="w-6 h-6 rounded bg-[#003087] grid place-content-center text-white font-black">P</div>
+            <div class="w-6 h-6 rounded bg-[#0070E0] grid place-content-center text-white font-black -ml-3">P</div>
+            <span class="text-white/80 text-sm">PayPal accepted (demo)</span>
+          </div>
+          <a id="footer-telegram" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-brand-accent text-navy-900 font-semibold">
+            <svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M10.07 13.97l-.4 3.92c.58 0 .83-.25 1.12-.55l2.69-2.6l5.57 4.08c1.02.56 1.75.27 2.01-.95l3.64-17.02h.01c.32-1.5-.54-2.09-1.53-1.74L1.44 9.64C-.12 10.24-.1 11.12 1.16 11.5l5.63 1.75l13.08-8.26c.61-.37 1.17-.17.71.2"/></svg>
+            Telegram
+          </a>
+        </div>
+      </div>
+      <div>
+     <div class="font-semibold mb-3">Explore</div>
+        <ul class="space-y-2 text-white/80">
+          <li><a href="#/courses" class="hover:text-white">All Courses</a></li>
+          <li><a href="#/instructor" class="hover:text-white">Become an Instructor</a></li>
+          <li><a href="#/instructor" class="hover:text-white">Affiliate Program</a></li>
+          <li><a href="#/about" class="hover:text-white">About us</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="font-semibold mb-3">Specialties</div>
+        <ul id="footer-categories" class="space-y-2 text-white/80"></ul>
+      </div>
+      <div>
+        <div class="font-semibold mb-3">Contact</div>
+        <p class="text-white/80">Email form on Contact page</p>
+        <p class="text-white/80">Alternative payments via Telegram</p>
+      </div>
+    </div>
+    <div class="border-t border-white/10">
+      <div class="max-w-7xl mx-auto px-4 py-4 text-sm text-white/70 flex flex-col sm:flex-row items-center justify-between gap-2">
+        <div>© <span id="year"></span> MedElite Academy. All rights reserved.</div>
+        <div class="flex items-center gap-4">
+          <a href="#" class="hover:text-white">Terms</a>
+          <a href="#" class="hover:text-white">Privacy</a>
+          <a href="#" class="hover:text-white">Cookies</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Settings Drawer -->
+  <div id="settings-overlay" class="fixed inset-0 bg-black/40 z-[60] hidden"></div>
+  <aside id="settings-drawer" class="fixed right-0 top-0 h-full w-full max-w-md bg-white shadow-card z-[70] translate-x-full transition-transform">
+    <div class="p-5 border-b border-slate-200 flex items-center justify-between">
+      <h3 class="text-lg font-semibold text-navy-900">Site Settings</h3>
+      <button id="close-settings" class="p-2 rounded-lg hover:bg-slate-100">
+        <svg width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor"    d="M18.3 5.71L12 12l6.3 6.29l-1.41 1.42L10.59 13.4l-6.3 6.3L2.89 18.3l6.29-6.3l-6.3-6.29L4.3 3.29l6.29 6.3l6.3-6.3z"/></svg>
+      </button>
+    </div>
+    <form id="settings-form" class="p-5 grid gap-4">
+      <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1">Academy Name</label>
+        <input name="brandName" class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-navy-600" placeholder="MedElite Academy" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1">PayPal Link (paypal.me or checkout URL)</label>
+        <input name="paypalLink" class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-navy-600" placeholder="https://paypal.me/YourBusiness" />
+        <p class="text-xs text-slate-500 mt-1">Buttons will open this link in a new tab. If it's a paypal.me link, the amount will be appended.</p>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1">Telegram Support URL</label>
+        <input name="telegram" class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-navy-600" placeholder="https://t.me/MedEliteAcademy" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1">Coupon Codes (name:percent, comma-separated)</label>
+        <input name="coupons" class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-navy-600" placeholder="MEDELITE50:50, FREE100:100" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1">Primary Accent (hex)</label>
+        <input name="accent" class="w-full rounded-lg border border-slate-300 px-3 py-2" placeholder="#35B0AB" />
+      </div>
+      <div class="pt-2 flex items-center justify-between">
+        <button type="button" id="reset-settings" class="px-3 py-2 rounded-lg border border-slate-300 hover:bg-slate-100">Reset</button>
+        <button type="submit" class="px-4 py-2 rounded-lg bg-navy-800 text-white hover:bg-navy-700">Save</button>
+      </div>
+      <div class="text-[12px] text-slate-500 mt-2">
+        Note: Payment is demo only within this preview. Real transactions should be configured on your website after publishing.
+      </div>
+    </form>
+  </aside>
+
+  <!-- Global Modals -->
+  <div id="modal-root"></div>
+
+  <script>
+    // ----------------------------- App State --------------------------------
+    const defaultSettings = {
+      brandName: 'MedElite Academy',
+      paypalLink: '', // e.g., https://paypal.me/YourBusiness
+      telegram: 'https://t.me/MedEliteAcademy',
+      coupons: { 'MEDELITE50': 50, 'FREE100': 100 },
+      accent: '#35B0AB'
+    };
+
+    const CATEGORIES = [
+      { id: 'surgery', name: 'Surgery' },
+      { id: 'internal', name: 'Internal Medicine' },
+      { id: 'pharmacy', name: 'Pharmacy' },
+      { id: 'nursing', name: 'Nursing' },
+      { id: 'radiology', name: 'Radiology' },
+      { id: 'dermatology', name: 'Dermatology' }
+    ];
+
+    const courses = [
+      {
+        id: 'c1',
+        title: 'Advanced Surgical Techniques',
+        instructor: 'Dr. A. Rahman',
+        price: 149,
+        category: 'surgery',
+        rating: 4.8,
+        ratingCount: 482,
+        isNew: true,
+        isPopular: true,
+        color: '#0ea5e9',
+        description: 'Hands-on surgical skill-building with real-world case simulations and best-practice protocols.',
+        curriculum: [
+          { id: 'c1-i1', type: 'video', title: 'Aseptic Principles', duration: '10m' },
+          { id: 'c1-i2', type: 'video', title: 'Incision & Exposure', duration: '18m' },
+          { id: 'c1-i3', type: 'quiz', title: 'Pre-op Safety Quiz', duration: '10 Qs' },
+          { id: 'c1-i4', type: 'assignment', title: 'Post-op Plan', duration: 'Case write-up' },
+        ],
+        related: ['c2','c4']
+      },
+      {
+        id: 'c2',
+        title: 'Clinical Pharmacology Masterclass',
+        instructor: 'Prof. L. Chen',
+        price: 99,
+        category: 'pharmacy',
+        rating: 4.6,
+        ratingCount: 361,
+        isNew: false,
+        isPopular: true,
+        color: '#22c55e',
+        description: 'Mechanisms, indications, and safety essentials across major drug classes for clinical excellence.',
+        curriculum: [
+          { id: 'c2-i1', type: 'video', title: 'Pharmacokinetics Basics', duration: '15m' },
+          { id: 'c2-i2', type: 'video', title: 'Drug Interactions', duration: '22m' },
+          { id: 'c2-i3', type: 'quiz', title: 'Dose Calculations', duration: '12 Qs' },
+        ],
+        related: ['c3','c5']
+      },
+      {
+        id: 'c3',
+        title: 'Evidence-based Internal Medicine',
+        instructor: 'Dr. S. O’Connor',
+        price: 129,
+        category: 'internal',
+        rating: 4.7,
+        ratingCount: 409,
+        isNew: true,
+        isPopular: false,
+        color: '#f59e0b',
+        description: 'From guideline appraisal to bedside: make stronger decisions with evidence you can trust.',
+        curriculum: [
+          { id: 'c3-i1', type: 'video', title: 'PICO & Study Design', duration: '12m' },
+          { id: 'c3-i2', type: 'video', title: 'Interpreting Forest Plots', duration: '16m' },
+          { id: 'c3-i3', type: 'assignment', title: 'Critical Appraisal', duration: 'Project' },
+        ],
+        related: ['c2','c6']
+      },
+      {
+        id: 'c4',
+        title: 'Perioperative Nursing Essentials',
+        instructor: 'Nurse M. Al-Farsi',
+        price: 79,
+        category: 'nursing',
+        rating: 4.5,
+        ratingCount: 188,
+        isNew: false,
+        isPopular: true,
+        color: '#a855f7',
+        description: 'Roles, protocols, and leadership for safe perioperative care from induction to recovery.',
+        curriculum: [
+          { id: 'c4-i1', type: 'video', title: 'Pre-op Checklist', duration: '9m' },
+          { id: 'c4-i2', type: 'quiz', title: 'OR Safety Quiz', duration: '8 Qs' },
+        ],
+        related: ['c1','c3']
+      },
+      {
+        id: 'c5',
+        title: 'Dermatology: Diagnosis to Management',
+        instructor: 'Dr. K. Haddad',
+        price: 89,
+        category: 'dermatology',
+        rating: 4.4,
+        ratingCount: 156,
+        isNew: true,
+        isPopular: false,
+        color: '#ef4444',
+        description: 'Pattern recognition, differentials, and treatments for common and urgent derm conditions.',
+        curriculum: [
+          { id: 'c5-i1', type: 'video', title: 'Lesion Morphology', duration: '13m' },
+          { id: 'c5-i2', type: 'video', title: 'Derm Emergencies', duration: '14m' },
+          { id: 'c5-i3', type: 'quiz', title: 'Diagnosis Practice', duration: '10 Qs' },
+        ],
+        related: ['c3','c2']
+      },
+      {
+        id: 'c6',
+        title: 'Imaging Fundamentals for Clinicians',
+        instructor: 'Dr. M. Russo',
+        price: 109,
+        category: 'radiology',
+        rating: 4.6,
+        ratingCount: 201,
+        isNew: false,
+        isPopular: false,
+        color: '#06b6d4',
+        description: 'Choose the right modality, read with confidence, and communicate findings effectively.',
+        curriculum: [
+          { id: 'c6-i1', type: 'video', title: 'X-ray Essentials', duration: '17m' },
+          { id: 'c6-i2', type: 'video', title: 'CT & MRI Basics', duration: '21m' },
+          { id: 'c6-i3', type: 'assignment', title: 'Report Writing', duration: 'Template' },
+        ],
+        related: ['c3','c5']
+      }
+    ];
+
+    const state = {
+      settings: loadSettings(),
+      courses: courses.map(c => ({ ...c, views: 0 })),
+      currentUser: loadCurrentUser(),
+      enrollments: loadEnrollments(), // { [email]: { [courseId]: { progress: {itemId: bool}, completedAt?: ts } } }
+      notifications: loadNotifications(), // { [email]: [ { id, text, read } ] }
+      catalogFilters: { q: '', cat: 'all', rating: 0, price: 'all' }
+    };
+
+    function loadSettings() {
+      try {
+        const s = JSON.parse(localStorage.getItem('me_settings') || 'null');
+        if (!s) return structuredClone(defaultSettings);
+        // Merge defaults with saved
+        return { ...structuredClone(defaultSettings), ...s };
+      } catch { return structuredClone(defaultSettings); }
+    }
+    function saveSettings() {
+      localStorage.setItem('me_settings', JSON.stringify(state.settings));
+      applyBranding();
+    }
+
+    function loadCurrentUser() {
+      try { return JSON.parse(localStorage.getItem('me_currentUser') || 'null'); } catch { return null; }
+    }
+    function saveCurrentUser() {
+      localStorage.setItem('me_currentUser', JSON.stringify(state.currentUser));
+    }
+
+    function loadEnrollments() {
+      try { return JSON.parse(localStorage.getItem('me_enrollments') || '{}'); } catch { return {}; }
+    }
+    function saveEnrollments() {
+      localStorage.setItem('me_enrollments', JSON.stringify(state.enrollments));
+    }
+
+    function loadNotifications() {
+      try { return JSON.parse(localStorage.getItem('me_notifications') || '{}'); } catch { return {}; }
+    }
+    function saveNotifications() {
+      localStorage.setItem('me_notifications', JSON.stringify(state.notifications));
+    }
+
+    // ----------------------------- Utilities --------------------------------
+    function $(sel, el = document) { return el.querySelector(sel); }
+    function $all(sel, el = document) { return [...el.querySelectorAll(sel)]; }
+    function currency(n) { return '$' + n.toFixed(2); }
+    function stars(rating) {
+      const full = Math.floor(rating);
+      const half = rating - full >= 0.5;
+      let s = '';
+      for (let i=0;i<5;i++) {
+        if (i < full) s += '★';
+        else if (i === full && half) s += '☆';
+        else s += '☆';
+      }
+      return s;
+    }
+    function toast(msg, type='success') {
+      const root = document.body;
+      const el = document.createElement('div');
+      el.className = `fixed top-4 right-4 z-[80] px-4 py-2 rounded-lg shadow-card text-white ${type==='success'?'bg-navy-800':'bg-red-600'}`;
+      el.textContent = msg;
+      root.appendChild(el);
+      setTimeout(()=>{ el.classList.add('opacity-0','translate-y-2');}, 1800);
+      setTimeout(()=>{ el.remove(); }, 2200);
+    }
+    function applyBranding() {
+      document.title = `${state.settings.brandName} — Global Medical Courses`;
+      $all('.brand-name').forEach(n=> n.textContent = state.settings.brandName);
+      // Update accent color utilities via CSS variable
+      document.documentElement.style.setProperty('--accent', state.settings.accent);
+      $all('.accent-bg').forEach(n=> n.style.backgroundColor = state.settings.accent);
+      $all('.accent-text').forEach(n=> n.style.color = state.settings.accent);
+      $all('.accent-border').forEach(n=> n.style.borderColor = state.settings.accent);
+      // Update Telegram links
+      const tel = state.settings.telegram;
+      ['topbar-telegram','footer-telegram'].forEach(id => {
+        const a = document.getElementById(id);
+        if (a) a.href = tel || '#';
+      });
+    }
+
+    function openExternal(url) {
+      try { window.open(url, '_blank', 'noopener,noreferrer'); }
+      catch { /* ignore */ }
+    }
+
+    function composePaypalLink(amount, courseTitle) {
+      const base = state.settings.paypalLink || '';
+      if (!base) return '';
+      if (base.includes('paypal.me/')) {
+        return `${base}/${encodeURIComponent(amount)}`; // simple amount append
+      }
+      // Fallback: append params if allowed
+      try {
+        const u = new URL(base);
+        u.searchParams.set('item_name', courseTitle);
+        u.searchParams.set('amount', String(amount));
+        return u.toString();
+      } catch {
+        return base;
+      }
+    }
+
+    function ensureUser() {
+      if (!state.currentUser) {
+        openModal({
+          title: 'Guest access',
+          content: `<p class="text-slate-600">You’re browsing as a guest. To save progress, please use the "Join Now (Demo)" button — no password required.</p>`,
+          actions: [{ label: 'Join Now', cls: 'bg-navy-800 text-white', onClick: ()=>{ closeModal(); navigate('/register'); } }, { label: 'Continue as guest', cls: 'border border-slate-300' }]
+        });
+        return false;
+      }
+      return true;
+    }
+
+    // ----------------------------- Router -----------------------------------
+    const routes = {
+      '/home': renderHome,
+      '/courses': renderCourses,
+      '/course': renderCourse, // expects /course/:id
+      '/register': renderRegister,
+      // '/login': intentionally not implemented due to security limitations
+      '/dashboard': renderDashboard,
+      '/instructor': renderInstructor,
+      '/about': renderAbout,
+      '/contact': renderContact
+    };
+
+    function parseHash() {
+      const h = location.hash || '#/home';
+      const [path, ...rest] = h.slice(1).split('?')[0].split('/').filter(Boolean);
+      const segments = h.slice(1).split('/').filter(Boolean);
+      return { path: '/' + (path || 'home'), segments, hash: h };
+    }
+
+    function navigate(path) {
+      if (location.hash !== '#' + path) location.hash = '#' + path;
+      else render();
+    }
+
+    window.addEventListener('hashchange', render);
+    window.addEventListener('load', () => {
+      document.getElementById('year').textContent = new Date().getFullYear();
+      applyBranding();
+      render();
+      buildFooterCategories();
+    });
+
+    function markActiveNav() {
+      const { path } = parseHash();
+      $all('header .nav-link').forEach(a => {
+        const href = a.getAttribute('href') || '';
+        a.classList.toggle('bg-slate-100', href.includes(path));
+      });
+    }
+
+    function render() {
+      const app = document.getElementById('app');
+      const { path, segments } = parseHash();
+      markActiveNav();
+      app.innerHTML = '';
+      app.classList.add('fade-enter'); requestAnimationFrame(()=>{
+        app.classList.add('fade-enter-active');
+      });
+      setTimeout(()=> app.classList.remove('fade-enter','fade-enter-active'), 280);
+
+      if (path === '/course') {
+        const id = segments[1];
+        routes['/course'](app, id);
+        return;
+      }
+      const renderer = routes[path] || routes['/home'];
+      renderer(app);
+      document.getElementById('mobile-nav')?.classList.add('hidden');
+    }
+
+    // ----------------------------- Components --------------------------------
+    function courseChip(catId) {
+      const cat = CATEGORIES.find(c=>c.id===catId);
+      return `<span class="inline-flex items-center text-xs px-2.5 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-700">${cat ? cat.name : 'General'}</span>`;
+    }
+
+    function courseCard(c) {
+      return `
+        <div class="group rounded-xl bg-white border border-slate-200 shadow-soft hover:shadow-card transition overflow-hidden flex flex-col">
+          <div class="h-40 relative">
+            ${svgCourseThumb(c.color, c.category)}
+            ${c.isNew ? '<span class="absolute top-3 left-3 text-[11px] bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-1 rounded-full">New</span>':''}
+            ${c.isPopular ? '<span class="absolute top-3 right-3 text-[11px] bg-amber-50 text-amber-700 border border-amber-200 px-2 py-1 rounded-full">Popular</span>':''}
+          </div>
+          <div class="p-4 flex-1 flex flex-col">
+            <div class="flex items-center justify-between gap-2">
+              ${courseChip(c.category)}
+              <div class="text-navy-800 font-semibold">${currency(c.price)}</div>
+            </div>
+            <h3 class="mt-2 font-bold text-navy-900 line-clamp-2">${c.title}</h3>
+            <div class="text-sm text-slate-600 mt-1">by ${c.instructor}</div>
+            <div class="mt-2 text-amber-500 text-sm">${stars(c.rating)} <span class="text-slate-500 ml-1">(${c.ratingCount})</span></div>
+            <p class="mt-2 text-sm text-slate-700 line-clamp-2">${c.description}</p>
+            <div class="mt-4 grid grid-cols-2 gap-2">
+              <a href="#/course/${c.id}" class="text-center px-3 py-2 rounded-lg border border-slate-300 hover:bg-slate-50">View Course</a>
+              <button data-buy="${c.id}" class="px-3 py-2 rounded-lg bg-navy-800 text-white hover:bg-navy-700">Buy Now</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function svgCourseThumb(color, category) {
+      const icon = (() => {
+        switch (category) {
+          case 'surgery': return '<path d="M6 17l6-6l6 6" stroke="white" stroke-width="2" fill="none"/><rect x="5" y="6" width="14" height="4" rx="2" fill="white" opacity=".3"/>';
+          case 'pharmacy': return '<path d="M8 8h8M8 8a4 4 0 1 0 8 0" stroke="white" stroke-width="2" fill="none"/><rect x="6" y="12" width="12" height="6" rx="3" fill="white" opacity=".3"/>';
+          case 'internal': return '<circle cx="12" cy="10" r="4" stroke="white" stroke-width="2" fill="none"/><path d="M4 20c2-4 6-6 8-6s6 2 8 6" stroke="white" stroke-width="2" fill="none"/>';
+          case 'nursing': return '<path d="M12 5l6 3v4c0 3-2 6-6 8c-4-2-6-5-6-8V8l6-3z" fill="white" opacity=".25"/><path d="M10 10h4M12 8v4" stroke="white" stroke-width="2"/>';
+          case 'radiology': return '<circle cx="12" cy="12" r="6" stroke="white" stroke-width="2" fill="none"/><path d="M12 6v6l4 4" stroke="white" stroke-width="2"/>';
+          case 'dermatology': return '<circle cx="12" cy="12" r="5" fill="white" opacity=".25"/><circle cx="10" cy="12" r="1.2" fill="white"/><circle cx="14" cy="12" r="1.2" fill="white"/>';
+          default: return '<rect x="6" y="6" width="12" height="12" rx="4" fill="white" opacity=".3"/>';
+        }
+      })();
+      return `
+        <svg class="w-full h-full" viewBox="0 0 400 200" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="g${Math.random().toString(36).slice(2)}" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="${color}" />
+              <stop offset="100%" stop-color="#0F1D30" />
+            </linearGradient>
+          </defs>
+          <rect width="400" height="200" fill="url(#g${Math.random().toString(36).slice(2)})" />
+          <g transform="translate(180,90) scale(6)">${icon}</g>
+        </svg>
+      `;
+    }
+
+    function openModal({ title, content, actions = [] }) {
+      const root = document.getElementById('modal-root');
+      const wrap = document.createElement('div');
+      wrap.innerHTML = `
+        <div class="fixed inset-0 z-[90]">
+          <div class="absolute inset-0 bg-black/40"></div>
+          <div class="min-h-full grid place-items-center p-4">
+            <div class="w-full max-w-lg rounded-2xl bg-white shadow-card overflow-hidden">
+              <div class="px-5 py-4 border-b border-slate-200 flex items-center justify-between">
+                <h3 class="text-lg font-semibold text-navy-900">${title || ''}</h3>
+                <button class="p-2 rounded-lg hover:bg-slate-100" data-close-modal>
+                  <svg width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M18.3 5.71L12 12l6.3 6.29l-1.41 1.42L10.59 13.4l-6.3 6.3L2.89 18.3l6.29-6.3l-6.3-6.29L4.3 3.29l6.29 6.3l6.3-6.3z"/></svg>
+                </button>
+              </div>
+              <div class="px-5 py-4">${content || ''}</div>
+              <div class="px-5 py-4 border-t border-slate-200 flex items-center justify-end gap-2">
+                ${actions.map((a,i)=>`<button data-act="${i}" class="px-3.5 py-2 rounded-lg ${a.cls || 'border border-slate-300'}">${a.label}</button>`).join('')}
+              </div>
+            </div>
+          </div>
+        </div>`;
+      root.appendChild(wrap);
+      wrap.querySelector('[data-close-modal]').addEventListener('click', closeModal);
+      actions.forEach((a,i)=>{
+        wrap.querySelector(`[data-act="${i}"]`)?.addEventListener('click', a.onClick || closeModal);
+      });
+      root.addEventListener('click', (e) => {
+        if (e.target === root || e.target.classList.contains('bg-black/40')) closeModal();
+      }, { once: true });
+    }
+    function closeModal() {
+      const root = document.getElementById('modal-root');
+      root.innerHTML = '';
+    }
+
+    // ----------------------------- Pages ------------------------------------
+    function renderHome(app) {
+      app.innerHTML = `
+        <section class="relative">
+          <div class="max-w-7xl mx-auto px-4 pt-12 pb-16">
+            <div class="grid lg:grid-cols-2 gap-10 items-center">
+              <div class="text-white">
+                <div class="inline-flex items-center gap-2 text-xs bg-white/10 border border-white/20 rounded-full px-3 py-1 mb-4">
+                  <span>Trusted by 50k+ learners</span>
+                </div>
+                <h1 class="text-3xl sm:text-5xl font-extrabold leading-tight">Learn. Heal. Lead.<br><span class="text-brand-accent">Advance your medical career</span></h1>
+                <p class="mt-4 text-white/90 max-w-xl">Practical courses taught by clinicians. Join MedElite Academy to upskill with confidence anywhere in the world.</p>
+                <div class="mt-6 flex flex-wrap items-center gap-3">
+                  <a href="#/courses" class="px-5 py-3 rounded-xl bg-brand-accent text-navy-900 font-bold shadow-soft hover:opacity-90">Browse Courses</a>
+                  <a href="#/register" class="px-5 py-3 rounded-xl border border-white/30 text-white hover:bg-white/10">Sign Up (Demo)</a>
+                </div>
+                <div class="mt-6 text-white/80 text-sm flex items-center gap-4">
+                  <div class="flex items-center gap-2">
+                    <span class="text-brand-accent">★</span> 4.7 average rating
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <span class="text-brand-accent">✓</span> Expert instructors
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <span class="text-brand-accent">$</span> PayPal (demo)
+                  </div>
+                </div>
+              </div>
+              <div class="rounded-2xl bg-white shadow-card p-6">
+                <div class="grid grid-cols-2 gap-4">
+                  ${state.courses.slice(0,4).map(c => `
+                    <a href="#/course/${c.id}" class="rounded-xl border border-slate-200 overflow-hidden hover:shadow-soft transition bg-white">
+                      <div class="h-24">${svgCourseThumb(c.color, c.category)}</div>
+                      <div class="p-3">
+                        <div class="text-xs text-slate-500">${CATEGORIES.find(x=>x.id===c.category)?.name || ''}</div>
+                        <div class="font-semibold text-navy-900 line-clamp-2">${c.title}</div>
+                        <div class="text-[12px] text-slate-500">${stars(c.rating)} • ${currency(c.price)}</div>
+                      </div>
+                    </a>
+                  `).join('')}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="max-w-7xl mx-auto px-4 py-14">
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="text-2xl font-bold text-navy-900">Featured new courses</h2>
+            <a href="#/courses" class="text-navy-700 hover:underline">See all</a>
+          </div>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            ${state.courses.filter(c=>c.isNew).slice(0,4).map(courseCard).join('')}
+          </div>
+        </section>
+
+        <section class="max-w-7xl mx-auto px-4 py-14">
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="text-2xl font-bold text-navy-900">Most popular</h2>
+          </div>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            ${state.courses.filter(c=>c.isPopular).slice(0,4).map(courseCard).join('')}
+          </div>
+        </section>
+
+        <section class="max-w-7xl mx-auto px-4 py-14">
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="text-2xl font-bold text-navy-900">Categories</h2>
+          </div>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+            ${CATEGORIES.map(cat => `
+              <button class="rounded-xl border border-slate-200 bg-white p-4 hover:shadow-soft text-left" data-go-courses="${cat.id}">
+                <div class="font-semibold text-navy-900">${cat.name}</div>
+                <div class="text-sm text-slate-600 mt-1">Explore ${cat.name} courses</div>
+              </button>
+            `).join('')}
+          </div>
+        </section>
+
+        <section class="bg-white">
+          <div class="max-w-7xl mx-auto px-4 py-14">
+            <h2 class="text-2xl font-bold text-navy-900 mb-6">What learners say</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+              ${[
+                {n:'Dr. Patel', t:'Concise and clinical. I applied lessons the same week.', r:5},
+                {n:'Maria, RN', t:'Clear, practical, and supportive. Great for periop refreshers!', r:5},
+                {n:'Omar', t:'Loved the evidence-based approach. Charts were super helpful.', r:4.5}
+              ].map(x => `
+                <div class="rounded-2xl border border-slate-200 p-5 bg-slate-50/60">
+                  <div class="text-amber-500 text-lg">${stars(x.r)}</div>
+                  <p class="mt-2 text-slate-700">“${x.t}”</p>
+                  <div class="mt-3 text-sm text-slate-500">— ${x.n}</div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </section>
+
+        <section class="max-w-7xl mx-auto px-4 py-14">
+          <div class="rounded-2xl bg-gradient-to-r from-navy-800 to-navy-600 text-white p-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+              <div class="text-xl font-semibold">Ready to boost your clinical impact?</div>
+              <div class="text-white/90">Join ${state.settings.brandName} and start learning today.</div>
+            </div>
+            <div class="flex items-center gap-3">
+              <a href="#/courses" class="px-5 py-3 rounded-xl bg-white text-navy-900 font-bold">Browse Courses</a>
+              <a href="#/register" class="px-5 py-3 rounded-xl border border-white/30 text-white hover:bg-white/10">Sign Up (Demo)</a>
+            </div>
+          </div>
+        </section>
+      `;
+
+      // Wire actions
+      $all('[data-go-courses]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const cat = e.currentTarget.getAttribute('data-go-courses');
+          state.catalogFilters = { q: '', cat, rating: 0, price: 'all' };
+          navigate('/courses');
+        });
+      });
+      wireBuyButtons(app);
+    }
+
+    function renderCourses(app) {
+      const f = state.catalogFilters;
+      app.innerHTML = `
+        <section class="max-w-7xl mx-auto px-4 py-10">
+          <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 mb-6">
+            <div>
+              <h1 class="text-2xl font-bold text-navy-900">Course Catalog</h1>
+              <p class="text-slate-600">Search and filter by specialty, price, and rating.</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button id="reset-filters" class="px-3 py-2 rounded-lg border border-slate-300 hover:bg-slate-100">Reset</button>
+            </div>
+          </div>
+
+          <div class="grid lg:grid-cols-[260px,1fr] gap-6">
+            <aside class="rounded-2xl bg-white border border-slate-200 p-4 h-fit">
+              <div class="font-semibold text-navy-900 mb-3">Filters</div>
+              <div class="mb-3">
+                <label class="text-sm text-slate-600">Search</label>
+                <input id="f-q" value="${f.q}" class="w-full mt-1 rounded-lg border border-slate-300 px-3 py-2" placeholder="Try 'Surgery' or 'Pharmacology'">
+              </div>
+              <div class="mb-3">
+                <label class="text-sm text-slate-600">Category</label>
+                <select id="f-cat" class="w-full mt-1 rounded-lg border border-slate-300 px-3 py-2">
+                  <option value="all">All</option>
+                  ${CATEGORIES.map(c=> `<option value="${c.id}" ${f.cat===c.id?'selected':''}>${c.name}</option>`).join('')}
+                </select>
+              </div>
+              <div class="mb-3">
+                <label class="text-sm text-slate-600">Minimum rating</label>
+                <input id="f-rating" type="range" min="0" max="5" step="0.5" value="${f.rating}" class="w-full">
+                <div class="text-sm text-slate-600 mt-1">≥ <span id="f-rating-val">${f.rating}</span> stars</div>
+              </div>
+              <div class="mb-2">
+                <label class="text-sm text-slate-600">Price</label>
+                <select id="f-price" class="w-full mt-1 rounded-lg border border-slate-300 px-3 py-2">
+                  <option value="all">All</option>
+                  <option value="lt100" ${f.price==='lt100'?'selected':''}>Under $100</option>
+                  <option value="100to120" ${f.price==='100to120'?'selected':''}>$100 - $120</option>
+                  <option value="gt120" ${f.price==='gt120'?'selected':''}>Over $1
