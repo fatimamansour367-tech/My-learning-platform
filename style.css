@@ -1,0 +1,23 @@
+:root {
+  --primary-color: #0F1D30;
+  --accent-color: #35B0AB;
+  --gray-color: #6B7280;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #F8FAFC;
+  color: var(--primary-color);
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  transition: 0.3s;
+}
+
+button:hover {
+  opacity: 0.9;
+}
